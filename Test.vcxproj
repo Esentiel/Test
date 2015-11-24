@@ -149,29 +149,23 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="FormulaCell.cpp" />
-    <ClCompile Include="IntOperand.cpp" />
     <ClCompile Include="NoneCell.cpp" />
     <ClCompile Include="NumberCell.cpp" />
-    <ClCompile Include="Operand.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="ReversePolandNotation.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StringCell.cpp" />
-    <ClCompile Include="StringOperand.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="FormulaCell.h" />
-    <ClInclude Include="IntOperand.h" />
     <ClInclude Include="NoneCell.h" />
     <ClInclude Include="NumberCell.h" />
-    <ClInclude Include="Operand.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="ReversePolandNotation.h" />
     <ClInclude Include="StringCell.h" />
-    <ClInclude Include="StringOperand.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -43,10 +43,10 @@ std::string Parser::findNextLink(std::string const &line)
 		}
 		else if (!isalnum(line.at(i)) && !(charPart.empty()) && !(numberPart.empty()))
 		{
-			return charPart.append(numberPart);
+			break;
 		}
 	}
-	return charPart.append(numberPart);
+	if (numberPart.size() > 0 && charPart.size() > 0) return charPart.append(numberPart);
 }
 
 std::string Parser::getLinkValue(std::string const &link, std::vector<std::vector<std::string>> inputvalues)
