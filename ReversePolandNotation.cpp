@@ -1,5 +1,5 @@
 #include "ReversePolandNotation.h"
-
+/*
 template <class T>
 class Operand;
 
@@ -129,7 +129,7 @@ Operand<std::string> Operand<std::string>::operator*(const Operand<int>& b) cons
 	return str;
 }
 
-
+*/
 
 ReversePolandNotation::ReversePolandNotation()
 {
@@ -240,36 +240,56 @@ std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &
 //TODO: refactoring due to new implementation
 std::string ReversePolandNotation::evaluateFormula(std::vector<std::string> rpFormula)
 {
-	std::string val1;//delete? or use to pass value to method? 
-	std::string val2;//delete?
-	std::string result;
-	std::unique_ptr <std::stack <std::string>> numbers = std::make_unique<std::stack <std::string>>();
+	Variant val1;
+	Variant val2;
+	Variant result; 
+	//std::string result;
+	std::unique_ptr <std::stack <Variant>> numbers = std::make_unique<std::stack <Variant>>();
 	for (auto element : rpFormula)
 	{
-		if (isAlphaNum(element))
+		if (isAlpha(element))
 		{
-			numbers->push(element.c_str());
+			numbers->push(Variant (element));
+		}else if (isDigit(element)){
+			numbers->push(Variant (std::atoi(element.c_str())));
 		}
 		else {
 			val2 = numbers->top();
 			numbers->pop();
 			val1 = numbers->top();
 			numbers->pop();
-			std::cout << val1 << std::endl;
-			std::cout << val2 << std::endl;
-			numbers->push(makeCalculations(val1, val2, element.at(0)));
+			switch(element.at(0))
+			{
+				case '+':
+					numbers->push(val1 + val2);
+					break;
+				case '-':
+					numbers->push(val1 - val2);
+					break;
+				case '*':
+					numbers->push(val1 * val2);
+					break;
+				case '/':
+					numbers->push(val1 / val2);
+					break;
+			}
 		}
 	}
-	result = (numbers->top());
+	result = numbers->top();
 	numbers->pop();
-	return result;
+	if (result.getType() == integ)
+	{
+		return std::to_string(result.getInt());
+	}else{
+		return result.getString();
+	}
 }
 
 std::string ReversePolandNotation::performCalculation(std::string &formula)
 {
 	return evaluateFormula(parseFormula(formula));
 }
-
+/*
 std::string ReversePolandNotation::makeCalculations(std::string const &val1, std::string const &val2, char const sign) const
 {
 	if (isDigit(val1) && isDigit(val2))
@@ -333,6 +353,7 @@ std::string ReversePolandNotation::makeCalculations(std::string const &val1, std
 	}
 	return "#Calculation Error";
 }
+*/
 
 ReversePolandNotation::~ReversePolandNotation()
 {

@@ -1,6 +1,6 @@
 #include "Factory.h"
 #include "UserInterface.h"
-#include <conio.h>
+//#include <conio.h>
 
 using namespace std;
 
@@ -63,6 +63,6 @@ int main()
 	delete fac;
 	clean();
 
-	_getch();
+//	_getch();
 	return 0;
 }

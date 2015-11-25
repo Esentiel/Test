@@ -4,6 +4,7 @@
 #include <vector>
 #include <stack>
 #include <iostream>
+#include "Variant.h"
 
 class ReversePolandNotation
 {
@@ -14,7 +15,7 @@ private:
 	bool isAlpha(std::string const &str) const;
 	std::vector<std::string> parseFormula(std::string const &formula);
 	std::string evaluateFormula(std::vector<std::string> rpFormula);
-	std::string makeCalculations(std::string const &operand1, std::string const &operand2, char const sign) const;
+	//std::string makeCalculations(std::string const &operand1, std::string const &operand2, char const sign) const;
 public:
 	ReversePolandNotation();
 	std::string performCalculation(std::string &formula);
