@@ -46,7 +46,7 @@ std::string Parser::findNextLink(std::string const &line)
 			break;
 		}
 	}
-	if (numberPart.size() > 0 && charPart.size() > 0) return charPart.append(numberPart);
+	if (numberPart.size() > 0 && charPart.size() > 0) return charPart.append(numberPart); else return "";
 }
 
 std::string Parser::getLinkValue(std::string const &link, std::vector<std::vector<std::string>> inputvalues)

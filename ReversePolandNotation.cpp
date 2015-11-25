@@ -1,6 +1,42 @@
 #include "ReversePolandNotation.h"
 
 template <class T>
+class Operand;
+
+template <>
+class Operand<std::string>
+{
+	std::string value;
+public:
+	Operand() {};
+	Operand(std::string initValue)
+	{
+		value = initValue;
+	};
+
+	Operand <std::string> operator+(Operand<std::string> const &b) const
+	{
+		Operand<std::string> str(*this);
+		str.setValue(str.getValue() + b.getValue());
+		return str;
+	}
+
+	Operand <std::string> operator+(Operand<int> const &b) const;
+
+	Operand <std::string> operator*(Operand<int> const &b) const;
+
+	std::string getValue() const
+	{
+		return value;
+	}
+
+	void setValue(std::string initValue)
+	{
+		value = initValue;
+	}
+};
+
+template <class T>
 class Operand
 {
 	T value;
@@ -71,56 +107,27 @@ public:
 	}
 };
 
-template <>
-class Operand <std::string>
+
+Operand<std::string> Operand<std::string>::operator+(const Operand<int>& b) const
 {
-	std::string value;
-public:
-	Operand() {};
-	Operand(std::string initValue)
-	{
-		value = initValue;
-	};
+	Operand<std::string> str(*this);
+	str.setValue(str.getValue() + std::to_string(b.getValue()));
+	return str;
+}
 
-	Operand <std::string> operator+(Operand<std::string> const &b) const
+Operand<std::string> Operand<std::string>::operator*(const Operand<int>& b) const
+{
+	Operand<std::string> str(*this);
+	int n = b.getValue();
+	std::string strPart = str.getValue();
+
+	while (n--)
 	{
-		Operand<std::string> str(*this);
-		str.setValue(str.getValue() + b.getValue());
-		return str;
+		str.setValue(str.getValue() + strPart);
 	}
 
-	Operand <std::string> operator+(Operand<int> const &b) const
-	{
-		Operand<std::string> str(*this);
-		str.setValue(str.getValue() + std::to_string(b.getValue()));
-		return str;
-	}
-
-	Operand <std::string> operator*(Operand<int> const &b) const
-	{
-		Operand<std::string> str(*this);
-		int n = b.getValue();
-		std::string strPart = str.getValue();
-
-		while (n--)
-		{
-			str.setValue(str.getValue() + strPart);
-		}
-
-		return str;
-	}
-
-	std::string getValue() const
-	{
-		return value;
-	}
-
-	void setValue(std::string initValue)
-	{
-		value = initValue;
-	}
-};
-
+	return str;
+}
 
 
 
