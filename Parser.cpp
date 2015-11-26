@@ -26,29 +26,35 @@ std::string Parser::parseLine(std::string &line, std::vector<std::vector<std::st
 	return
 		line.find('#') == std::string::npos ? rpnAdapter->performCalculation(line) : "#Wrong Link!";
 }
-
+//TODO:refactoring is required for this method
 std::string Parser::findNextLink(std::string const &line)
 {
 	std::string charPart = "";
 	std::string numberPart = "";
-	for (size_t i = 0; i < line.size(); i++)
+	for (auto element : line)
 	{
-		if (isalpha(line.at(i)))
+		if (isalpha(element))
 		{
-			charPart.append(1, line.at(i));
+			charPart.append(1, element);
 		}
-		else if (isdigit(line.at(i)) && !(charPart.empty()))
+		else if (isdigit(element) && !(charPart.empty()))
 		{
-			numberPart.append(1, line.at(i));
+			numberPart.append(1, element);
 		}
-		else if (!isalnum(line.at(i)))
+		else if (!isalnum(element))
 		{
-			break;
+			if ((numberPart.size() > 0) && (charPart.size() > 0))
+			{
+				return charPart.append(numberPart);
+			}else{
+				charPart = "";
+				numberPart = "";
+			}
 		}
 	}
-	if ((numberPart.size() > 0) && (charPart.size() > 0)) {
-		std::cout<<numberPart.size();
-		return charPart.append(numberPart); 
+	if ((numberPart.size() > 0) && (charPart.size() > 0))
+	{
+		return charPart.append(numberPart);
 	}else{
 		return "";
 	}
@@ -65,7 +71,7 @@ std::string Parser::getLinkValue(std::string const &link, std::vector<std::vecto
 		return "#Wrong link";
 	}
 	std::string linkResult = inputvalues.at(y - 1).at(x - 1);
-	if (linkResult.at(0) == '=')
+	if ((linkResult.at(0) == '=') || (linkResult.at(0)) == '\'')
 	{
 		linkResult.at(0) = '(';
 		linkResult.push_back(')');

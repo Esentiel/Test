@@ -2,18 +2,17 @@
 #include <string>
 #include <iostream>
 
-enum Type {string, integ};
+enum Type {String, Integer};
 class Variant
 {
 	public:
 		Variant();
-		Variant(int value);
 		Variant(std::string value);
 		Type getType() const;
-		std::string getString() const;
-		int getInt() const;
-		void setInt(int value);
+		std::string asString() const;
+		operator int() const;
 		void setString(std::string);
+		void setInt(int value);
 		Variant operator+(const Variant &b) const;
 		Variant operator-(const Variant &b) const;
 		Variant operator*(const Variant &b) const;
@@ -23,5 +22,6 @@ class Variant
 		Type type;
 		std::string stringValue;
 		int intValue;
+		bool isDigit(const std::string &str) const;
 
 };

@@ -247,11 +247,9 @@ std::string ReversePolandNotation::evaluateFormula(std::vector<std::string> rpFo
 	std::unique_ptr <std::stack <Variant>> numbers = std::make_unique<std::stack <Variant>>();
 	for (auto element : rpFormula)
 	{
-		if (isAlpha(element))
+		if (isAlphaNum(element))
 		{
 			numbers->push(Variant (element));
-		}else if (isDigit(element)){
-			numbers->push(Variant (std::atoi(element.c_str())));
 		}
 		else {
 			val2 = numbers->top();
@@ -277,12 +275,7 @@ std::string ReversePolandNotation::evaluateFormula(std::vector<std::string> rpFo
 	}
 	result = numbers->top();
 	numbers->pop();
-	if (result.getType() == integ)
-	{
-		return std::to_string(result.getInt());
-	}else{
-		return result.getString();
-	}
+	return result.asString();
 }
 
 std::string ReversePolandNotation::performCalculation(std::string &formula)

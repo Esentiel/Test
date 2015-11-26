@@ -4,16 +4,26 @@ Variant::Variant()
 {
 }
 
-Variant::Variant(int value)
+bool Variant::isDigit(const std::string &str) const
 {
-	intValue = value;
-	type = integ;
+	for (auto element : str)
+	{
+		if (!isdigit(element))
+			return false;
+	}
+	return true;
 }
 
 Variant::Variant(std::string value)
 {
-	stringValue = value;
-	type = string;
+	if (isDigit(value))
+	{
+		intValue = std::atoi(value.c_str());
+		type = Type::Integer;
+	}else{
+		stringValue = value;
+		type = Type::String;
+	}
 }
 
 Type Variant::getType() const
@@ -21,14 +31,24 @@ Type Variant::getType() const
 	return type;
 }
 
-int Variant::getInt() const
+std::string Variant::asString() const
 {
-	return intValue;
+	if (type == Type::String)
+	{
+		return stringValue;
+	}else{
+		return std::to_string(intValue);
+	}
 }
 
-std::string Variant::getString() const
+Variant::operator int() const
 {
-	return stringValue;
+	if (type == Type::Integer)
+	{
+		return intValue;
+	}else{
+		return -1;
+	}
 }
 
 void Variant::setInt(int value)
@@ -43,22 +63,22 @@ void Variant::setString(std::string value)
 
 Variant Variant::operator+(const Variant &b) const
 {
-	if (this->getType() == integ && b.getType() == integ)
+	if (this->getType() == Type::Integer && b.getType() == Type::Integer)
 	{
 		Variant v(*this);	
-		v.setInt(v.getInt()+b.getInt());
+		v.setInt(static_cast<int>(v) + static_cast<int>(b));
 		return v;
-	}else if (this->getType() == string && b.getType() == string) {
+	}else if (this->getType() == Type::String && b.getType() == Type::String) {
 		Variant v(*this);
-		v.setString(v.getString() + b.getString());
+		v.setString(v.asString() + b.asString());
 		return v;
-	}else if (this->getType() == string && b.getType() == integ){
+	}else if (this->getType() == Type::String && b.getType() == Type::Integer){
 		Variant v(*this);
-		v.setString(v.getString() + std::to_string(b.getInt()));
+		v.setString(v.asString() + b.asString());
 		return v;
-	}else if (this->getType() == integ && b.getType() == string){
+	}else if (this->getType() == Type::Integer && b.getType() == Type::String){
 		Variant v(b);
-		v.setString(std::to_string(this->getInt()) + b.getString());
+		v.setString(this->asString() + b.asString());
 		return v;
 	}else{
 		Variant v("#Calculation Error");
@@ -69,8 +89,8 @@ Variant Variant::operator+(const Variant &b) const
 Variant Variant::operator-(const Variant &b) const
 {
 	Variant v(*this);
-	if (v.getType() == integ && b.getType() == integ){
-		v.setInt(v.getInt() - b.getInt());
+	if (v.getType() == Type::Integer && b.getType() == Type::Integer){
+		v.setInt(static_cast<int>(v) - static_cast<int>(b));
 	}
 	//TODO:add exceptions handling here
 	return v;
@@ -78,29 +98,29 @@ Variant Variant::operator-(const Variant &b) const
 
 Variant Variant::operator*(const Variant &b) const
 {
-	if (this->getType() == integ && b.getType() == string){
+	if (this->getType() == Type::Integer && b.getType() == Type::String){
 		Variant v(b);
-		int n = this->getInt();
-		std::string strPart = v.getString();
+		int n = static_cast<int>(*this);
+		std::string strPart = v.asString();
 		v.setString("");
 		while (n--)
 		{
-			v.setString(v.getString() + strPart);
+			v.setString(v.asString() + strPart);
 		}
 		return v;
-	}else if (this->getType() == string && b.getType() == integ){
+	}else if (this->getType() == Type::String && b.getType() == Type::Integer){
 		Variant v(*this);
-		int n = b.getInt();
-		std::string strPart = v.getString();
+		int n = static_cast<int>(b);
+		std::string strPart = v.asString();
 		v.setString("");
 		while (n--)
 		{
-			v.setString(v.getString() + strPart);
+			v.setString(v.asString() + strPart);
 		}
 		return v;
-	}else if (this->getType() == integ && b.getType() == integ){
+	}else if (this->getType() == Type::Integer && b.getType() == Type::Integer){
 		Variant v(*this);
-		v.setInt(v.getInt() * b.getInt());
+		v.setInt(static_cast<int>(v) * static_cast<int>(b));
 		return v;
 	}else{
 		Variant v("#Calculation Error");
@@ -112,9 +132,9 @@ Variant Variant::operator*(const Variant &b) const
 Variant Variant::operator/(const Variant &b) const
 {
 	Variant v(*this);
-	if (v.getType() == integ && b.getType() == integ)
+	if (v.getType() == Type::Integer && b.getType() == Type::Integer)
 	{
-		v.setInt(v.getInt() / b.getInt());
+		v.setInt(static_cast<int>(v) / static_cast<int>(b));
 	}
 	return v;
 }
