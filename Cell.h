@@ -4,13 +4,13 @@
 
 class Cell
 {
+public:
+	Cell(const std::string value);
+	std::string & getOutput() {return outputValue;};
+	virtual void evaluate() = 0;
+	virtual ~Cell();
 protected:
 	std::string inputValue;
 	std::string outputValue;
-public:
-	Cell(std::string const value);
-	std::string getOutput() const;
-	virtual void evaluate() = 0;
-	virtual ~Cell();
 };
 

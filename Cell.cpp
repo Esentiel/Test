@@ -1,9 +1,10 @@
 #include "Cell.h"
 
 //Cell
-Cell::Cell(std::string const value) { inputValue = value; };
-Cell::~Cell() {};
-std::string Cell::getOutput() const
+Cell::Cell(const std::string value)
 {
-	return outputValue;
+	inputValue = value;
 };
+
+Cell::~Cell() {};
+

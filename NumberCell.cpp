@@ -1,6 +1,6 @@
 #include "NumberCell.h"
 
-NumberCell::NumberCell(std::string const value) : Cell(value) {};
+NumberCell::NumberCell(const std::string value) : Cell(value) {};
 void NumberCell::evaluate()
 {
 	outputValue = inputValue;

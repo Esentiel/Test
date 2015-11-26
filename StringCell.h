@@ -5,7 +5,7 @@
 class StringCell : public Cell
 {
 public:
-	StringCell(std::string const value);
+	StringCell(const std::string value);
 	virtual void evaluate();
 	virtual ~StringCell();
 };

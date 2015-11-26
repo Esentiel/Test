@@ -1,6 +1,6 @@
 #include "NoneCell.h"
 
-NoneCell::NoneCell(std::string const value) : Cell(value) {};
+NoneCell::NoneCell(const std::string value) : Cell(value) {};
 void NoneCell::evaluate()
 {
 	outputValue = inputValue;

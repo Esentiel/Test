@@ -2,41 +2,51 @@
 
 Factory::Factory()
 {
-	parser = std::make_shared<Parser>();
 };
 
-
-inline Cell * Factory::getCell(std::string cellValue, StringVector2D const &inputValues)
+bool Factory::isDigit(const std::string &str) const
 {
-	char indicator = cellValue[0];
-	if (isdigit(indicator))
-		return new NumberCell(cellValue);
+	for (auto element : str)
+	{
+		if (!isdigit(element))
+			return false;
+	}
+	return true;
+}
+
+
+
+inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<StringVector2D> inputValues) const
+{
+	char indicator = cellValue.at(0);
+	if (isDigit(cellValue))
+        return std::make_shared<NumberCell>(cellValue);
 	switch (indicator)
 	{
 	case '\'':
-		return new StringCell(cellValue);
+        return std::make_shared<StringCell>(cellValue);
 	case '=':
-		return new FormulaCell(parser->parseLine(cellValue, inputValues));
+        return std::make_shared<FormulaCell>(cellValue, inputValues);
 	case '\0':
-		return new NoneCell(cellValue);
+        return std::make_shared<NoneCell>(cellValue);
 	default:
-		return new NoneCell("#Wrong input");
+        return std::make_shared<NoneCell>("#Wrong input");
 	}
 };
 
 
-void Factory::passValues(size_t const &sizeX, size_t const &sizeY, StringVector2D const &inputValues, CellVector2D &spreadsheet)
+void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_ptr<StringVector2D> inputValues, std::shared_ptr<CellVector2D> spreadsheet)
 {
-	spreadsheet.resize(sizeY);
-	for (size_t i = 0; i < (sizeY); i++)
-	{
-		spreadsheet[i].resize(sizeX);
+    spreadsheet->resize(sizeY);
+    for (size_t i = 0; i < (sizeY); i++)
+    {
+        spreadsheet->at(i).resize(sizeX);
 	}
-	for (size_t i = 0; i < spreadsheet.size(); i++)
+    for (size_t i = 0; i < spreadsheet->size(); i++)
 	{
-		for (size_t j = 0; j < spreadsheet[i].size(); j++)
+        for (size_t j = 0; j < spreadsheet->at(i).size(); j++)
 		{
-			spreadsheet[i][j] = Factory::getCell(inputValues[i][j], inputValues);
+            spreadsheet->at(i)[j] = getCell(inputValues->at(i)[j], inputValues);
 		}
 	}
 };

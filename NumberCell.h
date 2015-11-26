@@ -5,7 +5,7 @@
 class NumberCell : public Cell
 {
 public:
-	NumberCell(std::string const value);
+	NumberCell(const std::string value);
 	virtual void evaluate();
 	virtual ~NumberCell();
 };
