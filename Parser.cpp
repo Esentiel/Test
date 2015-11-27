@@ -29,35 +29,14 @@ std::string Parser::parseLine(std::string &line, std::vector<std::vector<std::st
 //TODO:refactoring is required for this method
 std::string Parser::findNextLink(std::string const &line)
 {
-	std::string charPart = "";
-	std::string numberPart = "";
-	for (auto element : line)
-	{
-		if (isalpha(element))
-		{
-			charPart.append(1, element);
-		}
-		else if (isdigit(element) && !(charPart.empty()))
-		{
-			numberPart.append(1, element);
-		}
-		else if (!isalnum(element))
-		{
-			if ((numberPart.size() > 0) && (charPart.size() > 0))
-			{
-				return charPart.append(numberPart);
-			}else{
-				charPart = "";
-				numberPart = "";
-			}
-		}
-	}
-	if ((numberPart.size() > 0) && (charPart.size() > 0))
-	{
-		return charPart.append(numberPart);
-	}else{
-		return "";
-	}
+    //regex version
+    std::smatch m;
+    std::regex e("[A-Z]+[0-9]+");
+    while (std::regex_search (line,m,e))
+    {
+        return m[0];
+    }
+    return "";
 }
 
 std::string Parser::getLinkValue(std::string const &link, std::vector<std::vector<std::string>> inputvalues)

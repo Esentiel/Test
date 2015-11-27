@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <memory>
 
-
 class Factory
 {
 public:

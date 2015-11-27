@@ -4,6 +4,7 @@
 #include <memory>
 #include <cstdlib>
 #include "ReversePolandNotation.h"
+#include <regex>
 
 #pragma once
 
