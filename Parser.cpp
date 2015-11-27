@@ -5,7 +5,8 @@ Parser::Parser()
 	rpnAdapter = std::make_unique<ReversePolandNotation>();
 }
 
-bool Parser::replace(std::string& str, const std::string& from, const std::string& to) {
+bool Parser::replace(std::string& str, const std::string& from, const std::string& to) const
+{
 	size_t start_pos = str.find(from);
 	if (start_pos == std::string::npos)
 		return false;
@@ -13,33 +14,33 @@ bool Parser::replace(std::string& str, const std::string& from, const std::strin
 	return true;
 }
 
-std::string Parser::parseLine(std::string &line, std::vector<std::vector<std::string>> const inputvalues)
+std::string Parser::parseLine(std::string &line, const std::vector<std::vector<std::string>> &inputvalues) const
 {
-	//check it before calculation too
-	if (line.find("/0") != std::string::npos)
-		return "#Division by zero";
 	line.replace(0, 1, "");
 	while (!(findNextLink(line).empty()))
 	{
 		replace(line, findNextLink(line), getLinkValue(findNextLink(line), inputvalues));
 	}
+    if (line.find("/0") != std::string::npos)
+        return "#Division by zero";
 	return
 		line.find('#') == std::string::npos ? rpnAdapter->performCalculation(line) : "#Wrong Link!";
 }
-//TODO:refactoring is required for this method
-std::string Parser::findNextLink(std::string const &line)
+
+std::string Parser::findNextLink(std::string const &line) const
 {
-    //regex version
     std::smatch m;
     std::regex e("[A-Z]+[0-9]+");
-    while (std::regex_search (line,m,e))
+    if (std::regex_search (line,m,e))
     {
         return m[0];
+    }else
+    {
+        return "";
     }
-    return "";
 }
 
-std::string Parser::getLinkValue(std::string const &link, std::vector<std::vector<std::string>> inputvalues)
+std::string Parser::getLinkValue(const std::string &link, const std::vector<std::vector<std::string>> &inputvalues) const
 {
 	size_t x = 0;
 	size_t y = 0;
@@ -50,15 +51,15 @@ std::string Parser::getLinkValue(std::string const &link, std::vector<std::vecto
 		return "#Wrong link";
 	}
 	std::string linkResult = inputvalues.at(y - 1).at(x - 1);
-	if ((linkResult.at(0) == '=') || (linkResult.at(0)) == '\'')
+    if ((linkResult.at(0) == '=') || (linkResult.at(0) == '\''))
 	{
 		linkResult.at(0) = '(';
 		linkResult.push_back(')');
 	}
 	return linkResult;
-};
+}
 
-void Parser::translateLink(std::string const &link, size_t &x, size_t &y)
+void Parser::translateLink(const std::string &link, size_t &x, size_t &y) const
 {
 	size_t idx = 0;
 	std::string stringX = "";
@@ -72,7 +73,7 @@ void Parser::translateLink(std::string const &link, size_t &x, size_t &y)
 		stringX += link.at(j);
 	}
 	x = atoi(stringX.c_str());
-};
+}
 
 Parser::~Parser()
 {

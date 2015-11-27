@@ -3,22 +3,20 @@
 #include <memory>
 #include <vector>
 #include <stack>
-#include <iostream>
 #include "Variant.h"
 
 class ReversePolandNotation
 {
-private:
-	int getPriority(char const character) const;
-	bool isAlphaNum(std::string const &str) const;
-	bool isDigit(std::string const &str) const;
-	bool isAlpha(std::string const &str) const;
-	std::vector<std::string> parseFormula(std::string const &formula);
-	std::string evaluateFormula(std::vector<std::string> rpFormula);
-	//std::string makeCalculations(std::string const &operand1, std::string const &operand2, char const sign) const;
 public:
-	ReversePolandNotation();
-	std::string performCalculation(std::string &formula);
-	~ReversePolandNotation();
+    ReversePolandNotation();
+    std::string performCalculation(const std::string &formula)  const;
+    ~ReversePolandNotation();
+private:
+    int getPriority(const char character) const;
+    bool isAlphaNum(const std::string &str) const;
+    bool isDigit(const std::string &str) const;
+    bool isAlpha(const std::string &str) const;
+    std::vector<std::string> parseFormula(const std::string &formula) const;
+    std::string evaluateFormula(const std::vector<std::string> &rpFormula) const;
 };
 

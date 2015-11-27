@@ -23,5 +23,4 @@ class Variant
 		std::string stringValue;
 		int intValue;
 		bool isDigit(const std::string &str) const;
-
 };

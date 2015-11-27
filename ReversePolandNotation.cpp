@@ -1,141 +1,10 @@
 #include "ReversePolandNotation.h"
-/*
-template <class T>
-class Operand;
-
-template <>
-class Operand<std::string>
-{
-	std::string value;
-public:
-	Operand() {};
-	Operand(std::string initValue)
-	{
-		value = initValue;
-	};
-
-	Operand <std::string> operator+(Operand<std::string> const &b) const
-	{
-		Operand<std::string> str(*this);
-		str.setValue(str.getValue() + b.getValue());
-		return str;
-	}
-
-	Operand <std::string> operator+(Operand<int> const &b) const;
-
-	Operand <std::string> operator*(Operand<int> const &b) const;
-
-	std::string getValue() const
-	{
-		return value;
-	}
-
-	void setValue(std::string initValue)
-	{
-		value = initValue;
-	}
-};
-
-template <class T>
-class Operand
-{
-	T value;
-public:
-	Operand() {};
-	Operand(T initValue)
-	{
-		value = initValue;
-	}
-
-	Operand<T> operator-(Operand<T> const &b) const
-	{
-		Operand<T> integ(*this);
-		integ.setValue(integ.getValue() - b.getValue());
-		return integ;
-	}
-	
-	Operand<T> operator/(Operand<T> const &b) const
-	{
-		Operand<T> integ(*this);
-		integ.setValue(integ.getValue() / b.getValue());
-		return integ;
-	}
-
-	Operand<T> operator+(Operand<T> const &b) const
-	{
-		Operand<T> integ(*this);
-		integ.setValue(integ.getValue() + b.getValue());
-		return integ;
-	}
-
-	Operand<std::string> operator+(Operand<std::string> const &b) const
-	{
-		Operand<std::string> str(std::to_string(this->getValue()));
-		str.setValue(str.getValue() + b.getValue());
-		return str;
-	}
-
-	Operand<T> operator*(Operand<T> const &b) const
-	{
-		Operand<T> integ(*this);
-		integ.setValue(integ.getValue() * b.getValue());
-		return integ;
-	}
-
-	Operand<std::string> operator*(Operand<std::string> const &b) const
-	{
-		Operand<std::string> str(b);
-		int n = this->getValue();
-		std::string strPart = str.getValue();
-
-		while (n--)
-		{
-			str.setValue(str.getValue() + strPart);
-		}
-
-		return str;
-	}
-
-	T getValue() const
-	{
-		return value;
-	}
-
-	void setValue(T initValue)
-	{
-		value = initValue;
-	}
-};
-
-
-Operand<std::string> Operand<std::string>::operator+(const Operand<int>& b) const
-{
-	Operand<std::string> str(*this);
-	str.setValue(str.getValue() + std::to_string(b.getValue()));
-	return str;
-}
-
-Operand<std::string> Operand<std::string>::operator*(const Operand<int>& b) const
-{
-	Operand<std::string> str(*this);
-	int n = b.getValue();
-	std::string strPart = str.getValue();
-
-	while (n--)
-	{
-		str.setValue(str.getValue() + strPart);
-	}
-
-	return str;
-}
-
-*/
 
 ReversePolandNotation::ReversePolandNotation()
 {
 }
 
-int ReversePolandNotation::getPriority(char const character) const
+int ReversePolandNotation::getPriority(const char character) const
 {
 	return
 		character == '+' || character == '-' ? 2 :
@@ -145,7 +14,7 @@ int ReversePolandNotation::getPriority(char const character) const
 		-1;
 }
 
-bool ReversePolandNotation::isAlphaNum(std::string const &str) const
+bool ReversePolandNotation::isAlphaNum(const std::string &str) const
 {
 	for (auto element : str)
 	{
@@ -155,7 +24,7 @@ bool ReversePolandNotation::isAlphaNum(std::string const &str) const
 	return true;
 }
 
-bool ReversePolandNotation::isDigit(std::string const &str) const
+bool ReversePolandNotation::isDigit(const std::string &str) const
 {
 	for (auto element : str)
 	{
@@ -165,7 +34,7 @@ bool ReversePolandNotation::isDigit(std::string const &str) const
 	return true;
 }
 
-bool ReversePolandNotation::isAlpha(std::string const &str) const
+bool ReversePolandNotation::isAlpha(const std::string &str) const
 {
 	for (auto element : str)
 	{
@@ -175,7 +44,7 @@ bool ReversePolandNotation::isAlpha(std::string const &str) const
 	return true;
 }
 
-std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &formula)
+std::vector<std::string> ReversePolandNotation::parseFormula(const std::string &formula)  const
 {
 	std::vector<std::string> output;
 	std::shared_ptr <std::stack <char>> signs = std::make_shared<std::stack <char>>();
@@ -190,13 +59,11 @@ std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &
 			if (!isalnum(previousChar))
 			{
 				output.push_back(std::string(1, element));
-			}
-			else {
+            }else {
 				output.back().append(1, element);
 			}
-		}
-		else
-		{//todo: move all "else" to a distinct method
+        }else
+        {
 			if (priority >= 2)
 			{
 				//in case priority of signs in stack are equal or greater than current sign
@@ -207,13 +74,11 @@ std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &
 				}
 				//add current sign to the stack
 				signs->push(element);
-			}
-			else if (priority == 1)
+            }else if (priority == 1)
 			{
 				//add '(' to the stack
 				signs->push(element);
-			}
-			else if (priority == 0)
+            }else if (priority == 0)
 			{
 				//find '('
 				while (getPriority(signs->top()) != 1)
@@ -228,7 +93,7 @@ std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &
 		//get prev char
 		previousChar = element;
 	}
-	//distinct method
+    //move all signs to a vector
 	while (signs->size() != 0)
 	{
 		output.push_back(std::string(1, signs->top()));
@@ -237,14 +102,13 @@ std::vector<std::string> ReversePolandNotation::parseFormula(std::string const &
 	return output;
 }
 
-//TODO: refactoring due to new implementation
-std::string ReversePolandNotation::evaluateFormula(std::vector<std::string> rpFormula)
+std::string ReversePolandNotation::evaluateFormula(const std::vector<std::string> &rpFormula)  const
 {
 	Variant val1;
 	Variant val2;
 	Variant result; 
-	//std::string result;
 	std::unique_ptr <std::stack <Variant>> numbers = std::make_unique<std::stack <Variant>>();
+
 	for (auto element : rpFormula)
 	{
 		if (isAlphaNum(element))
@@ -278,75 +142,11 @@ std::string ReversePolandNotation::evaluateFormula(std::vector<std::string> rpFo
 	return result.asString();
 }
 
-std::string ReversePolandNotation::performCalculation(std::string &formula)
+std::string ReversePolandNotation::performCalculation(const std::string &formula) const
 {
 	return evaluateFormula(parseFormula(formula));
 }
-/*
-std::string ReversePolandNotation::makeCalculations(std::string const &val1, std::string const &val2, char const sign) const
-{
-	if (isDigit(val1) && isDigit(val2))
-	{
-		Operand<int> operand1(std::atoi(val1.c_str()));
-		Operand<int> operand2(std::atoi(val2.c_str()));
-		switch (sign)
-		{
-		case '*':
-			return std::to_string((operand1 * operand2).getValue());
-			break;
-		case '-':
-			return std::to_string((operand1 - operand2).getValue());
-			break;
-		case '/':
-			return std::to_string((operand1 / operand2).getValue());
-			break;
-		case '+':
-			return std::to_string((operand1 + operand2).getValue());
-			break;
-		}
-	}
-	else if(isDigit(val1) && isAlpha(val2))
-	{
-		Operand<int> operand1(std::atoi(val1.c_str()));
-		Operand<std::string> operand2(val2);
-		switch (sign)
-		{
-		case '*':
-			return (operand1 * operand2).getValue();
-			break;
-		case '+':
-			return (operand1 + operand2).getValue();
-			break;
-		}
-	}
-	else if (isAlpha(val1) && isAlpha(val2))
-	{
-		Operand<std::string> operand1(val1);
-		Operand<std::string> operand2(val2);
-		switch (sign)
-		{
-		case '+':
-			return (operand1 + operand2).getValue();
-			break;
-		}
-	}
-	else if(isAlpha(val1) && isDigit(val2))
-	{
-		Operand<std::string> operand1(val1);
-		Operand<int> operand2(std::atoi(val2.c_str()));
-		switch (sign)
-		{
-		case '*':
-			return (operand1 * operand2).getValue();
-			break;
-		case '+':
-			return (operand1 + operand2).getValue();
-			break;
-		}
-	}
-	return "#Calculation Error";
-}
-*/
+
 
 ReversePolandNotation::~ReversePolandNotation()
 {

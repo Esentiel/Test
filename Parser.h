@@ -3,22 +3,22 @@
 #include <vector>
 #include <memory>
 #include <cstdlib>
-#include "ReversePolandNotation.h"
 #include <regex>
+#include "ReversePolandNotation.h"
 
 #pragma once
 
 class Parser
 {
+public:
+    Parser();
+    std::string parseLine(std::string &line, const std::vector<std::vector<std::string>> &inputvalues) const;
+    ~Parser();
 private:
 	std::unique_ptr<ReversePolandNotation> rpnAdapter;
-	std::string findNextLink(std::string const &line);
-	std::string getLinkValue(std::string const &link, std::vector<std::vector<std::string>> inputvalues);
-	void translateLink(std::string const &link, size_t &x, size_t &y);
-	bool replace(std::string &str, std::string const &from, std::string const &to);
-public:
-	Parser();
-	std::string parseLine(std::string &line, std::vector<std::vector<std::string>> const inputvalues);
-	~Parser();
+    std::string findNextLink(const std::string &line) const;
+    std::string getLinkValue(const std::string &link, const std::vector<std::vector<std::string>> &inputvalues) const;
+    void translateLink(const std::string &link, size_t &x, size_t &y) const;
+    bool replace(std::string &str, const std::string &from, const std::string &to) const;
 };
 
