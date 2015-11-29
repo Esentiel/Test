@@ -22,17 +22,17 @@ void bulkEval()
 
 void clean()
 {
-    for (auto row : *spreadsheet)
+    for (size_t i = 0; i < spreadsheet->size(); i++)
     {
-        spreadsheet[i].clear();
-        spreadsheet[i].shrink_to_fit();
-        inputValues[i].clear();
-        inputValues[i].shrink_to_fit();
+        spreadsheet->at(i).clear();
+        spreadsheet->at(i).shrink_to_fit();
+        inputValues->at(i).clear();
+        inputValues->at(i).shrink_to_fit();
     }
-    spreadsheet.clear();
-    spreadsheet.shrink_to_fit();
-    inputValues.clear();
-    inputValues.shrink_to_fit();
+    spreadsheet->clear();
+    spreadsheet->shrink_to_fit();
+    inputValues->clear();
+    inputValues->shrink_to_fit();
 }
 
 int main()
