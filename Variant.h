@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-enum Type {String, Integer};
+enum class Type {String, Integer};
 class Variant
 {
 	public:
