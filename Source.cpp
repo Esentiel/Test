@@ -1,7 +1,6 @@
 #include <memory>
 #include "Factory.h"
 #include "UserInterface.h"
-//#include <conio.h>
 
 using namespace std;
 
@@ -19,36 +18,22 @@ void bulkEval()
             spreadsheet->at(i).at(j)->evaluate();
 		}
 	}
-};
+}
 
-//void clean()
-//{
-//	for (auto row : *spreadsheet)
-//	{
-//		for (auto cell : row)
-//		{
-//			delete spreadsheet[i][j];
-//		}
-//		spreadsheet[i].clear();
-//		spreadsheet[i].shrink_to_fit();
-//		inputValues[i].clear();
-//		inputValues[i].shrink_to_fit();
-//	}
-//	spreadsheet.clear();
-//	spreadsheet.shrink_to_fit();
-//	inputValues.clear();
-//	inputValues.shrink_to_fit();
-//}
-
-/*
-//////////////////
-///REFACTORING////
-//////////////////
-//1. pass string as reference: (string &str) 
-//2. Use constatnt where possible
-//3.
-
-*/
+void clean()
+{
+    for (auto row : *spreadsheet)
+    {
+        spreadsheet[i].clear();
+        spreadsheet[i].shrink_to_fit();
+        inputValues[i].clear();
+        inputValues[i].shrink_to_fit();
+    }
+    spreadsheet.clear();
+    spreadsheet.shrink_to_fit();
+    inputValues.clear();
+    inputValues.shrink_to_fit();
+}
 
 int main()
 {
@@ -59,8 +44,6 @@ int main()
     fac->passValues(sizeX, sizeY, inputValues, spreadsheet);
 	bulkEval();
     ui->printOutput(spreadsheet);
-    //clean();
 
-//	_getch();
 	return 0;
 }
