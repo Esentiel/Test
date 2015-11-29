@@ -11,11 +11,11 @@ static size_t sizeY;
 
 void bulkEval()
 {
-    for (size_t i = 0; i < spreadsheet->size(); i++)
+    for (auto row : *spreadsheet)
 	{
-        for (size_t j = 0; j < spreadsheet->at(i).size(); j++)
+        for (auto cell : row)
 		{
-            spreadsheet->at(i).at(j)->evaluate();
+            cell->evaluate();
 		}
 	}
 }
