@@ -14,36 +14,6 @@ int ReversePolandNotation::getPriority(const char character) const
 		-1;
 }
 
-bool ReversePolandNotation::isAlphaNum(const std::string &str) const
-{
-	for (auto element : str)
-	{
-		if (!isalnum(element))
-			return false;
-	}
-	return true;
-}
-
-bool ReversePolandNotation::isDigit(const std::string &str) const
-{
-	for (auto element : str)
-	{
-		if (!isdigit(element))
-			return false;
-	}
-	return true;
-}
-
-bool ReversePolandNotation::isAlpha(const std::string &str) const
-{
-	for (auto element : str)
-	{
-		if (!isalpha(element))
-			return false;
-	}
-	return true;
-}
-
 std::vector<std::string> ReversePolandNotation::parseFormula(const std::string &formula)  const
 {
 	std::vector<std::string> output;
@@ -111,7 +81,7 @@ std::string ReversePolandNotation::evaluateFormula(const std::vector<std::string
 
 	for (auto element : rpFormula)
 	{
-		if (isAlphaNum(element))
+        if (usrlib::isAlphaNum(element))
 		{
 			numbers->push(Variant (element));
 		}

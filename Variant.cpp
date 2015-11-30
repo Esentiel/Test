@@ -4,19 +4,9 @@ Variant::Variant()
 {
 }
 
-bool Variant::isDigit(const std::string &str) const
-{
-	for (auto element : str)
-	{
-		if (!isdigit(element))
-			return false;
-	}
-	return true;
-}
-
 Variant::Variant(std::string value)
 {
-	if (isDigit(value))
+    if (usrlib::isDigit(value))
 	{
 		intValue = std::atoi(value.c_str());
 		type = Type::Integer;

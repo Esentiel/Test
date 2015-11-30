@@ -6,7 +6,7 @@ UserInterface::UserInterface()
 {
 }
 
-inline StringVector UserInterface::split(std::string line, StringVector row) const
+inline usrlib::StringVector UserInterface::split(std::string line, usrlib::StringVector row) const
 {
     for (size_t i = 0; i< row.size(); i++)
     {
@@ -22,7 +22,7 @@ inline StringVector UserInterface::split(std::string line, StringVector row) con
     return row;
 }
 
-inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_ptr<CellVector2D> spreadsheet) const
+inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const
 {
     size_t maxSize = 0;
     for (size_t i = 0; i < spreadsheet->size(); i++)
@@ -34,7 +34,7 @@ inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_
 }
 
 
-void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<StringVector2D> inputValues) const
+void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
 	std::cout << "Put a spreadsheet size: y\tx" << std::endl;
 	std::cin >> sizeY >> sizeX;
@@ -56,7 +56,7 @@ void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<Strin
 
 }
 
-void UserInterface::printOutput(const std::shared_ptr<CellVector2D> spreadsheet) const
+void UserInterface::printOutput(const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const
 {
 	std::cout << "Result table:" << std::endl;
 	int colWidth = 0;

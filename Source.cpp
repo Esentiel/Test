@@ -4,8 +4,8 @@
 
 using namespace std;
 
-static std::shared_ptr<StringVector2D> inputValues = std::make_shared<StringVector2D>();
-static std::shared_ptr<CellVector2D> spreadsheet = std::make_shared<CellVector2D>();
+static std::shared_ptr<usrlib::StringVector2D> inputValues = std::make_shared<usrlib::StringVector2D>();
+static std::shared_ptr<usrlib::CellVector2D> spreadsheet = std::make_shared<usrlib::CellVector2D>();
 static size_t sizeX;
 static size_t sizeY;
 

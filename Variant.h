@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "usrlib.h"
 
 enum class Type {String, Integer};
 class Variant
@@ -22,5 +23,4 @@ class Variant
 		Type type;
 		std::string stringValue;
 		int intValue;
-		bool isDigit(const std::string &str) const;
 };

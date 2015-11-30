@@ -5,21 +5,12 @@ Parser::Parser()
 	rpnAdapter = std::make_unique<ReversePolandNotation>();
 }
 
-bool Parser::replace(std::string& str, const std::string& from, const std::string& to) const
-{
-	size_t start_pos = str.find(from);
-	if (start_pos == std::string::npos)
-		return false;
-	str.replace(start_pos, from.length(), to);
-	return true;
-}
-
 std::string Parser::parseLine(std::string &line, const std::vector<std::vector<std::string>> &inputvalues) const
 {
 	line.replace(0, 1, "");
 	while (!(findNextLink(line).empty()))
 	{
-		replace(line, findNextLink(line), getLinkValue(findNextLink(line), inputvalues));
+        usrlib::replace(line, findNextLink(line), getLinkValue(findNextLink(line), inputvalues));
 	}
     if (line.find("/0") != std::string::npos)
         return "#Division by zero";

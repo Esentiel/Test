@@ -2,24 +2,12 @@
 
 Factory::Factory()
 {
-};
-
-bool Factory::isDigit(const std::string &str) const
-{
-	for (auto element : str)
-	{
-		if (!isdigit(element))
-			return false;
-	}
-	return true;
 }
 
-
-
-inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<StringVector2D> inputValues) const
+inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
 	char indicator = cellValue.at(0);
-	if (isDigit(cellValue))
+    if (usrlib::isDigit(cellValue))
         return std::make_shared<NumberCell>(cellValue);
 	switch (indicator)
 	{
@@ -32,10 +20,10 @@ inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::
 	default:
         return std::make_shared<NoneCell>("#Wrong input");
 	}
-};
+}
 
 
-void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_ptr<StringVector2D> inputValues, std::shared_ptr<CellVector2D> spreadsheet)
+void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues, std::shared_ptr<usrlib::CellVector2D> spreadsheet)
 {
     spreadsheet->resize(sizeY);
     for (size_t i = 0; i < (sizeY); i++)
@@ -49,8 +37,8 @@ void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_p
             spreadsheet->at(i)[j] = getCell(inputValues->at(i)[j], inputValues);
 		}
 	}
-};
+}
 
 Factory::~Factory()
 {
-};
+}
