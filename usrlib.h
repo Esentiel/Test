@@ -15,6 +15,7 @@ typedef std::vector<usrlib::CellVector> CellVector2D;
 bool isDigit(const std::string &str);
 bool isAlphaNum(const std::string &str);
 bool replace(std::string& str, const std::string& from, const std::string& to);
+std::vector<std::string> split(std::string str, const std::string &delim = "\t");
 }
 
 #endif // USRLIB

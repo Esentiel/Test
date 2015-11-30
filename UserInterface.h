@@ -14,7 +14,6 @@ public:
     void printOutput(std::shared_ptr<usrlib::CellVector2D> spreadsheet) const;
 	~UserInterface();
 private:
-    usrlib::StringVector split(std::string line, usrlib::StringVector row) const;
     int calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const;
 };
 

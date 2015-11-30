@@ -33,4 +33,17 @@ bool replace(std::string& str, const std::string& from, const std::string& to)
     return true;
 }
 
+//split string to a vector by delimiter
+std::vector<std::string> split(std::string str, const std::string &delim)
+{
+    std::vector<std::string> v;
+    while (str.find(delim) != std::string::npos)
+    {
+        v.push_back(str.substr(0, str.find(delim)));
+        str.erase(0, str.find(delim) + delim.length());
+    }
+    v.push_back(str);
+    return v;
+}
+
 }
