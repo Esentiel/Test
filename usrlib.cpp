@@ -43,7 +43,7 @@ std::vector<std::string> split(std::string str, const std::string &delim)
         str.erase(0, str.find(delim) + delim.length());
     }
     v.push_back(str);
-    return v;
+    return std::move(v);
 }
 
 }

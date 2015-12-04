@@ -6,7 +6,7 @@ class Cell
 {
 public:
 	Cell(const std::string value);
-	std::string & getOutput() {return outputValue;};
+    std::string & getOutput() {return outputValue;}
 	virtual void evaluate() = 0;
 	virtual ~Cell();
 protected:

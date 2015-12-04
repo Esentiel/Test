@@ -69,7 +69,7 @@ std::vector<std::string> ReversePolandNotation::parseFormula(const std::string &
 		output.push_back(std::string(1, signs->top()));
 		signs->pop();
 	}
-	return output;
+    return std::move(output);
 }
 
 std::string ReversePolandNotation::evaluateFormula(const std::vector<std::string> &rpFormula)  const
@@ -109,7 +109,7 @@ std::string ReversePolandNotation::evaluateFormula(const std::vector<std::string
 	}
 	result = numbers->top();
 	numbers->pop();
-	return result.asString();
+    return std::move(result.asString());
 }
 
 std::string ReversePolandNotation::performCalculation(const std::string &formula) const

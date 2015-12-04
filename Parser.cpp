@@ -47,7 +47,7 @@ std::string Parser::getLinkValue(const std::string &link, const std::vector<std:
 		linkResult.at(0) = '(';
 		linkResult.push_back(')');
 	}
-	return linkResult;
+    return std::move(linkResult);
 }
 
 void Parser::translateLink(const std::string &link, size_t &x, size_t &y) const
