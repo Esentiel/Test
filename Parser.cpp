@@ -56,14 +56,14 @@ void Parser::translateLink(const std::string &link, size_t &x, size_t &y) const
 	std::string stringX = "";
 	while (isalpha(link.at(idx)))
 	{
-		y = 26 * idx + (link.at(idx) - 64);
+        x = 26 * idx + (link.at(idx) - 64);
 		idx++;
 	}
 	for (size_t j = idx; j < link.size(); j++)
 	{
 		stringX += link.at(j);
 	}
-	x = atoi(stringX.c_str());
+    y = atoi(stringX.c_str());
 }
 
 Parser::~Parser()
