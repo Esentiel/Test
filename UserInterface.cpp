@@ -8,7 +8,7 @@ UserInterface::UserInterface()
 inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const
 {
     size_t maxSize = 0;
-    for (auto element : *spreadsheet)
+    for (auto const &element : *spreadsheet)
     {
         if (element.at(colNum)->getOutput().length() > maxSize)
             maxSize = element.at(colNum)->getOutput().length();

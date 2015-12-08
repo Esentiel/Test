@@ -40,7 +40,7 @@ std::vector<std::string> split(std::string str, const std::string &delim)
     while (str.find(delim) != std::string::npos)
     {
         v.push_back(str.substr(0, str.find(delim)));
-        str.erase(0, str.find(delim) + delim.length());
+        str.erase(0, str.find(delim) + delim.length());//erase makes copy of string. TODO: maybe something better?..
     }
     v.push_back(str);
     return std::move(v);

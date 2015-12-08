@@ -79,7 +79,7 @@ std::string ReversePolandNotation::evaluateFormula(const std::vector<std::string
 	Variant result; 
 	std::unique_ptr <std::stack <Variant>> numbers = std::make_unique<std::stack <Variant>>();
 
-	for (auto element : rpFormula)
+    for (auto const &element : rpFormula)
 	{
         if (usrlib::isAlphaNum(element))
 		{

@@ -11,9 +11,9 @@ static size_t sizeY;
 
 void bulkEval()
 {
-    for (auto row : *spreadsheet)
+    for (auto const &row : *spreadsheet)
 	{
-        for (auto cell : row)
+        for (auto const &cell : row)
 		{
             cell->evaluate();
 		}
