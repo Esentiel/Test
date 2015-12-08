@@ -81,8 +81,11 @@ Variant Variant::operator-(const Variant &b) const
 	Variant v(*this);
 	if (v.getType() == Type::Integer && b.getType() == Type::Integer){
 		v.setInt(static_cast<int>(v) - static_cast<int>(b));
-	}
-	//TODO:add exceptions handling here
+    }else
+    {
+        Variant vError("#Calculation Error");
+        return vError;
+    }
 	return v;
 }
 
@@ -116,7 +119,6 @@ Variant Variant::operator*(const Variant &b) const
 		Variant v("#Calculation Error");
 		return v;
 	}
-	//TODO:add exceptions handling
 }
 
 Variant Variant::operator/(const Variant &b) const
@@ -125,7 +127,11 @@ Variant Variant::operator/(const Variant &b) const
 	if (v.getType() == Type::Integer && b.getType() == Type::Integer)
 	{
 		v.setInt(static_cast<int>(v) / static_cast<int>(b));
-	}
+    }else
+    {
+        Variant vError("#Calculation Error");
+        return vError;
+    }
 	return v;
 }
 
