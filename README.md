@@ -8,5 +8,6 @@ Features:
 6. cmake file is included
 
 TODO:
+0. unit tests ?..
 1. CI ?
 2. GUI ?
