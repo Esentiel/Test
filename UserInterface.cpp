@@ -33,7 +33,7 @@ void UserInterface::manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<us
     }
 }
 
-void UserInterface::loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputValues) const
+void UserInterface::loadFromFile(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
     std::string line;
     std::ifstream csvFile(fileName);
@@ -44,6 +44,8 @@ void UserInterface::loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputVa
     {
         inputValues->push_back(std::move(usrlib::split(line, delimiter)));
     }
+    sizeY = inputValues->size();
+    sizeX = inputValues->at(0).size();
     csvFile.close();
 }
 
@@ -52,13 +54,7 @@ void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrli
     char answer;
     std::cout << "Do you want to load data from "<<fileName<<"? [y,n]" << std::endl;
     std::cin >> answer;
-    if (answer == 'y')
-    {
-        loadFromFile(inputValues);
-    }else{
-        manualInput(sizeX, sizeY, inputValues);
-    }
-//    answer == 'y' ? loadFromFile(inputValues) : manualInput(sizeX, sizeY, inputValues);
+    answer == 'y' ? loadFromFile(sizeX, sizeY, inputValues) : manualInput(sizeX, sizeY, inputValues);
 
 }
 

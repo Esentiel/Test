@@ -41,15 +41,6 @@ int main()
     std::unique_ptr<UserInterface> ui = std::make_unique<UserInterface>();
 
     ui->getInput(sizeX, sizeY, inputValues);
-
-    for (auto const &row : *inputValues)
-    {
-        for (auto const &cell : row)
-        {
-            std::cout<<cell<<std::endl;
-        }
-    }
-
     fac->passValues(sizeX, sizeY, inputValues, spreadsheet);
 	bulkEval();
     ui->printOutput(spreadsheet);

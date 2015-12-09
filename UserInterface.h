@@ -18,7 +18,7 @@ public:
 private:
     int calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const;
     void manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
-    void loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputValues) const;
+    void loadFromFile(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
     const std::string fileName = "data.csv";
     const std::string delimiter = ",";
 };
