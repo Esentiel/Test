@@ -16,22 +16,50 @@ inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_
     return maxSize;
 }
 
+void UserInterface::manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
+{
+    std::cout << "Put a spreadsheet size: y\tx" << std::endl;
+    std::cin >> sizeY >> sizeX;
+    std::cin.ignore();
+    inputValues->resize(sizeY);
+
+    std::cout << "Put spreadsheet data" << std::endl;
+    std::string line;
+    for (size_t i = 0; i < sizeY; i++)
+    {
+        getline(std::cin, line);
+        inputValues->at(i) = std::move(usrlib::split(line));
+        line.clear();
+    }
+}
+
+void UserInterface::loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputValues) const
+{
+    std::string line;
+    std::ifstream csvFile(fileName);
+    if (!csvFile.is_open())
+        throw std::invalid_argument(fileName+" doesn't exist.");
+
+    while (getline(csvFile,line))
+    {
+        inputValues->push_back(std::move(usrlib::split(line, delimiter)));
+    }
+    csvFile.close();
+}
 
 void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
-	std::cout << "Put a spreadsheet size: y\tx" << std::endl;
-	std::cin >> sizeY >> sizeX;
-	std::cin.ignore();
-    inputValues->resize(sizeY);
+    char answer;
+    std::cout << "Do you want to load data from "<<fileName<<"? [y,n]" << std::endl;
+    std::cin >> answer;
+    if (answer == 'y')
+    {
+        loadFromFile(inputValues);
+    }else{
+        manualInput(sizeX, sizeY, inputValues);
+    }
+//    answer == 'y' ? loadFromFile(inputValues) : manualInput(sizeX, sizeY, inputValues);
 
-	std::cout << "Put spreadsheet data" << std::endl;
-	std::string line;
-    for (size_t i = 0; i < sizeY; i++)
-	{
-		getline(std::cin, line);
-        inputValues->at(i) = std::move(usrlib::split(line));
-		line.clear();
-	}
 }
 
 void UserInterface::printOutput(const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const
