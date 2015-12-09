@@ -8,7 +8,13 @@ FormulaCell::FormulaCell(const std::string value, std::shared_ptr<usrlib::String
 
 void FormulaCell::evaluate()
 {
-    theFuture = std::async(std::launch::async, [&] () {return parser->parseLine(inputValue, *values);});
+    if ((values->size() > 100) || (values->at(0).size() > 100))//to perform threading only with big data amount
+    {
+        theFuture = std::async(/*std::launch::async,*/ [&] () {return parser->parseLine(inputValue, *values);});
+    }else{
+        outputValue = parser->parseLine(inputValue, *values);
+        wasExecuted = true;
+    }
 }
 
 std::string & FormulaCell::getOutput()
