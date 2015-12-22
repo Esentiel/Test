@@ -12,5 +12,5 @@ include_directories ("${PROJECT_BINARY_DIR}")
 #add_executable (Test Source.cpp)
 
 #headers
-set(SOURCES Cell.cpp Factory.cpp FormulaCell.cpp NoneCell.cpp NumberCell.cpp Parser.cpp ReversePolandNotation.cpp StringCell.cpp UserInterface.cpp Source.cpp Variant.cpp usrlib.cpp Cell.h Factory.h FormulaCell.h NoneCell.h NumberCell.h Parser.h ReversePolandNotation.h StringCell.h UserInterface.h Variant.h usrlib.h)
+set(SOURCES Factory.cpp FormulaCell.cpp NoneCell.cpp NumberCell.cpp Parser.cpp ReversePolandNotation.cpp StringCell.cpp UserInterface.cpp Source.cpp Variant.cpp usrlib.cpp Cell.h Factory.h FormulaCell.h NoneCell.h NumberCell.h Parser.h ReversePolandNotation.h StringCell.h UserInterface.h Variant.h usrlib.h)
 add_executable(Test ${SOURCES})

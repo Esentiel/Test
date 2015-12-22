@@ -17,4 +17,6 @@ private:
     std::shared_ptr<usrlib::StringVector2D> values;
     std::future<std::string> theFuture;
     bool wasExecuted;
+    std::string inputValue;
+    std::string outputValue;
 };

@@ -1,6 +1,6 @@
 #include "FormulaCell.h"
 
-FormulaCell::FormulaCell(const std::string value, std::shared_ptr<usrlib::StringVector2D> inputValues) : Cell(value) {
+FormulaCell::FormulaCell(const std::string value, std::shared_ptr<usrlib::StringVector2D> inputValues) : inputValue{value} {
     parser = std::make_shared<Parser>();
     values = inputValues;
     wasExecuted = false;
