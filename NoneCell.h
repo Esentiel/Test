@@ -7,9 +7,8 @@ class NoneCell : public Cell
 {
 public:
 	NoneCell(const std::string value);
-	void evaluate();
-    virtual std::string & getOutput() {return outputValue;}
-	virtual ~NoneCell();
+    void evaluate(){outputValue = inputValue;}
+    std::string & getOutput() {return outputValue;}
 private:
     std::string inputValue;
     std::string outputValue;

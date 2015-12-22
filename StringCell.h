@@ -6,9 +6,8 @@ class StringCell : public Cell
 {
 public:
 	StringCell(const std::string value);
-	virtual void evaluate();
-    virtual std::string & getOutput() {return outputValue;}
-	virtual ~StringCell();
+    void evaluate(){outputValue = inputValue.replace(0, 1, "");}
+    std::string & getOutput() {return outputValue;}
 private:
     std::string inputValue;
     std::string outputValue;
