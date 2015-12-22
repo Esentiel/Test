@@ -1,9 +1,5 @@
 #include "ReversePolandNotation.h"
 
-ReversePolandNotation::ReversePolandNotation()
-{
-}
-
 int ReversePolandNotation::getPriority(const char character) const
 {
 	return
@@ -17,7 +13,7 @@ int ReversePolandNotation::getPriority(const char character) const
 std::vector<std::string> ReversePolandNotation::parseFormula(const std::string &formula)  const
 {
 	std::vector<std::string> output;
-	std::shared_ptr <std::stack <char>> signs = std::make_shared<std::stack <char>>();
+    std::unique_ptr <std::stack <char>> signs = std::make_unique<std::stack <char>>();
 	char previousChar = '_';
 	//
 	for (auto element: formula)
@@ -117,7 +113,3 @@ std::string ReversePolandNotation::performCalculation(const std::string &formula
 	return evaluateFormula(parseFormula(formula));
 }
 
-
-ReversePolandNotation::~ReversePolandNotation()
-{
-}

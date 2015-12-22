@@ -1,10 +1,5 @@
 #include "UserInterface.h"
 
-UserInterface::UserInterface()
-{
-}
-
-
 inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const
 {
     size_t maxSize = 0;
@@ -75,8 +70,4 @@ void UserInterface::printOutput(const std::shared_ptr<usrlib::CellVector2D> spre
 			}
 		}
 	}
-}
-
-UserInterface::~UserInterface()
-{
 }

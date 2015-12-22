@@ -14,7 +14,6 @@ class Parser
 public:
     Parser();
     std::string parseLine(std::string &line, const std::vector<std::vector<std::string>> &inputvalues) const;
-    ~Parser();
 private:
 	std::unique_ptr<ReversePolandNotation> rpnAdapter;
     std::string findNextLink(const std::string &line) const;

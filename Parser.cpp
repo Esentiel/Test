@@ -65,7 +65,3 @@ void Parser::translateLink(const std::string &link, size_t &x, size_t &y) const
 	}
     y = atoi(stringX.c_str());
 }
-
-Parser::~Parser()
-{
-}

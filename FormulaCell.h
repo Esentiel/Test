@@ -13,7 +13,7 @@ public:
     std::string & getOutput();
 private:
     std::string inputValue;
-    std::shared_ptr<Parser> parser;
+    std::unique_ptr<Parser> parser;
     std::shared_ptr<usrlib::StringVector2D> values;
     std::future<std::string> theFuture;
     bool wasExecuted;

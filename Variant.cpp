@@ -134,7 +134,3 @@ Variant Variant::operator/(const Variant &b) const
     }
 	return v;
 }
-
-Variant::~Variant()
-{
-}

@@ -1,9 +1,5 @@
 #include "Factory.h"
 
-Factory::Factory()
-{
-}
-
 inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
 	char indicator = cellValue.at(0);
@@ -37,8 +33,4 @@ void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_p
             spreadsheet->at(i)[j] = getCell(inputValues->at(i)[j], inputValues);
 		}
 	}
-}
-
-Factory::~Factory()
-{
 }

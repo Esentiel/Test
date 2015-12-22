@@ -6,7 +6,7 @@
 class NoneCell : public Cell
 {
 public:
-	NoneCell(const std::string value);
+    explicit NoneCell(const std::string value);
     void evaluate(){outputValue = inputValue;}
     std::string & getOutput() {return outputValue;}
 private:

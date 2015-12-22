@@ -20,21 +20,6 @@ void bulkEval()
 	}
 }
 
-void clean()
-{
-    for (size_t i = 0; i < spreadsheet->size(); i++)
-    {
-        spreadsheet->at(i).clear();
-        spreadsheet->at(i).shrink_to_fit();
-        inputValues->at(i).clear();
-        inputValues->at(i).shrink_to_fit();
-    }
-    spreadsheet->clear();
-    spreadsheet->shrink_to_fit();
-    inputValues->clear();
-    inputValues->shrink_to_fit();
-}
-
 int main()
 {
     std::unique_ptr<Factory> fac = std::make_unique<Factory>();

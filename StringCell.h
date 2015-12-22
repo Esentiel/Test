@@ -5,7 +5,7 @@
 class StringCell : public Cell
 {
 public:
-	StringCell(const std::string value);
+    explicit StringCell(const std::string value);
     void evaluate(){outputValue = inputValue.replace(0, 1, "");}
     std::string & getOutput() {return outputValue;}
 private:

@@ -9,9 +9,7 @@
 class ReversePolandNotation
 {
 public:
-    ReversePolandNotation();
     std::string performCalculation(const std::string &formula)  const;
-    ~ReversePolandNotation();
 private:
     int getPriority(const char character) const;
     std::vector<std::string> parseFormula(const std::string &formula) const;
