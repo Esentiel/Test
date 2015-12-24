@@ -1,20 +1,20 @@
 #include "Factory.h"
 
-inline std::shared_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<usrlib::StringVector2D> inputValues) const
+inline std::unique_ptr<Cell> Factory::getCell(const std::string cellValue, std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
 	char indicator = cellValue.at(0);
     if (usrlib::isDigit(cellValue))
-        return std::make_shared<NumberCell>(cellValue);
+        return std::make_unique<NumberCell>(cellValue);
 	switch (indicator)
 	{
 	case '\'':
-        return std::make_shared<StringCell>(cellValue);
+        return std::make_unique<StringCell>(cellValue);
 	case '=':
-        return std::make_shared<FormulaCell>(cellValue, inputValues);
+        return std::make_unique<FormulaCell>(cellValue, inputValues);
 	case '\0':
-        return std::make_shared<NoneCell>(cellValue);
+        return std::make_unique<NoneCell>(cellValue);
 	default:
-        return std::make_shared<NoneCell>("#Wrong input");
+        return std::make_unique<NoneCell>("#Wrong input");
 	}
 }
 
