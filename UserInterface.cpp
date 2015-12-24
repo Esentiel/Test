@@ -11,7 +11,7 @@ inline int UserInterface::calcMaxColumnSize(const int colNum, const std::shared_
     return maxSize;
 }
 
-void UserInterface::manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
+void UserInterface::manualInput(std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
     std::cout << "Put a spreadsheet size: y\tx" << std::endl;
     std::cin >> sizeY >> sizeX;
@@ -28,7 +28,7 @@ void UserInterface::manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<us
     }
 }
 
-void UserInterface::loadFromFile(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
+void UserInterface::loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
     std::string line;
     std::ifstream csvFile(fileName);
@@ -39,17 +39,15 @@ void UserInterface::loadFromFile(size_t &sizeX, size_t &sizeY, std::shared_ptr<u
     {
         inputValues->push_back(std::move(usrlib::split(line, delimiter)));
     }
-    sizeY = inputValues->size();
-    sizeX = inputValues->at(0).size();
     csvFile.close();
 }
 
-void UserInterface::getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const
+void UserInterface::getInput(std::shared_ptr<usrlib::StringVector2D> inputValues) const
 {
     char answer;
     std::cout << "Do you want to load data from "<<fileName<<"? [y,n]" << std::endl;
     std::cin >> answer;
-    answer == 'y' ? loadFromFile(sizeX, sizeY, inputValues) : manualInput(sizeX, sizeY, inputValues);
+    answer == 'y' ? loadFromFile(inputValues) : manualInput(inputValues);
 
 }
 

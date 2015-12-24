@@ -11,13 +11,15 @@
 class UserInterface
 {
 public:
-    void getInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
+    void getInput(std::shared_ptr<usrlib::StringVector2D> inputValues) const;
     void printOutput(std::shared_ptr<usrlib::CellVector2D> spreadsheet) const;
 private:
     int calcMaxColumnSize(const int colNum, const std::shared_ptr<usrlib::CellVector2D> spreadsheet) const;
-    void manualInput(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
-    void loadFromFile(size_t &sizeX, size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
+    void manualInput(std::shared_ptr<usrlib::StringVector2D> inputValues) const;
+    void loadFromFile(std::shared_ptr<usrlib::StringVector2D> inputValues) const;
     const std::string fileName = "data.csv";
     const std::string delimiter = ",";
+    mutable size_t sizeX;
+    mutable size_t sizeY;
 };
 

@@ -19,8 +19,11 @@ inline std::unique_ptr<Cell> Factory::getCell(const std::string cellValue, std::
 }
 
 
-void Factory::passValues(const size_t &sizeX, const size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues, std::shared_ptr<usrlib::CellVector2D> spreadsheet)
+void Factory::passValues(std::shared_ptr<usrlib::StringVector2D> inputValues, std::shared_ptr<usrlib::CellVector2D> spreadsheet)
 {
+    const size_t sizeY = inputValues->size();
+    const size_t sizeX = inputValues->at(0).size();
+
     spreadsheet->resize(sizeY);
     for (size_t i = 0; i < (sizeY); i++)
     {

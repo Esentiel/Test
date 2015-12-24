@@ -13,7 +13,7 @@
 class Factory
 {
 public:
-    void passValues(const size_t &sizeX, const size_t &sizeY, std::shared_ptr<usrlib::StringVector2D> inputValues, std::shared_ptr<usrlib::CellVector2D> spreadsheet);
+    void passValues(std::shared_ptr<usrlib::StringVector2D> inputValues, std::shared_ptr<usrlib::CellVector2D> spreadsheet);
 private:
     inline std::unique_ptr<Cell> getCell(const std::string cellValue, std::shared_ptr<usrlib::StringVector2D> inputValues) const;
 };
